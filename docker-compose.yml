@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  notes-app-vite:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: notes-app-vite
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+    ports:
+      - "${HTTP_PORT}:8080" #Change this port in vite.config.js
+    volumes:
+      - ".:/var/www"
+    networks:
+      - notes-app-vite-network
+
+networks:
+  notes-app-vite-network:
+    driver: bridge
